@@ -1,14 +1,21 @@
+// 用来对于用户输入原样输入回去
 use std::io::prelude::*;
+// 用来开启一个tcp监听
 use std::net::TcpListener;
+// 用来使用收到的用户输入流
 use std::net::TcpStream;
+// 用来开启一个线程处理接收到的事件，防止多个输入会卡住的情况
 use std::thread;
+// 用来创建字符串
 use std::str;
 
 
 fn main() {
+    // 开启一个监听7878端口的listener
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
 
     for stream in listener.incoming() {
+        // 匹配接收到的流
         match stream {
             // 当Result 枚举类型匹配Ok时
             Ok(stream) => {
